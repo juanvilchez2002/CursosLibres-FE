@@ -43,7 +43,10 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             width: 300px;
+<<<<<<< HEAD
             justify-items: center;
+=======
+>>>>>>> 038e5a302e56541109446496fe475b959506ba22
         }
 
         .logo{
@@ -68,6 +71,7 @@
             text-align: center;
         }
 
+<<<<<<< HEAD
         .email-image{
             width: 132px;
             height: 132px;
@@ -94,6 +98,27 @@
         .resend a{
             color: var(--hospital-green);
             text-decoration: none;
+=======
+        .label{
+            font-size: var(--sm);
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .input{
+            background-color: var(--text-input-field);
+            border: none;
+            border-radius: 8px;
+            height: 30px;
+            font-size: var(--md);
+            padding: 6px;
+            margin-bottom: 12px;
+        }
+
+        .form{
+            display: flex;
+            flex-direction: column;
+>>>>>>> 038e5a302e56541109446496fe475b959506ba22
         }
 
         .primary-button{
@@ -129,6 +154,7 @@
                 class="logo"
             >
             <h1 class="title">
+<<<<<<< HEAD
                 Email has been sent!!!
             </h1>
             <p class="subtitle">
@@ -151,6 +177,40 @@
                     </a>
                 </span>
             </p>
+=======
+                Create a New Password
+            </h1>
+            <p class="subtitle">
+                Enter a new password for you account
+            </p>
+            <form action="#"  class="form">
+                <label for="password" class="label">
+                    Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password"
+                    placeholder="*********"
+                    class="input input-password"
+                > 
+
+                <label for="new-password"  class="label">
+                    Re-enter password
+                </label>
+                <input 
+                    type="password"
+                    id="new-password"
+                    placeholder="*********"
+                    class="input input-password"                
+                >
+
+                <input 
+                    type="submit" 
+                    value="Confirm" 
+                    class="primary-button login-button"
+                >
+            </form>
+>>>>>>> 038e5a302e56541109446496fe475b959506ba22
         </div>
     </div>
 </body>
