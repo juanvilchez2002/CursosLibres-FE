@@ -43,7 +43,6 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             width: 300px;
-            justify-items: center;
         }
 
         .logo{
@@ -53,47 +52,37 @@
             display: none;
         }
 
-        .title{
-            font-size: var(--lg);
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        .subtitle{
-            color: var(--very-light-pink);
-            font-size: var(--md);
-            font-weight: 300;
-            margin-top: 0;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .email-image{
-            width: 132px;
-            height: 132px;
-            border-radius: 50%;
-            background-color: var(--text-input-field);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .email-image img{
-            width: 80px;
-        }
-
-        .resend{
+        .label{
             font-size: var(--sm);
+            font-weight: bold;
+            margin-bottom: 4px;
         }
 
-        .resend span{
-            color: var(--very-light-pink);
+        .input{
+            background-color: var(--text-input-field);
+            border: none;
+            border-radius: 8px;
+            height: 30px;
+            font-size: var(--md);
+            padding: 6px;
+            margin-bottom: 12px;
         }
 
-        .resend a{
+        .input-email{
+            margin-bottom: 22px;
+        }
+
+        .form{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form a{
             color: var(--hospital-green);
+            font-size: var(--sm);
+            text-align: center;
             text-decoration: none;
+            margin-bottom: 54px;
         }
 
         .primary-button{
@@ -101,6 +90,18 @@
             border-radius: 8px;
             border: none;
             color: var(--white);
+            cursor: pointer;
+            width: 100%;
+            font-size: var(--md);
+            font-weight: bold;
+            height: 50px;
+        }
+
+        .secondary-button{
+            background-color: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--hospital-green);
+            color: var(--hospital-green);
             cursor: pointer;
             width: 100%;
             font-size: var(--md);
@@ -117,6 +118,12 @@
             .logo{
                 display: block;
             }
+
+            .secondary-button{
+                position: absolute;
+                bottom: 20px;
+                width: 300px;
+            }
         }
     </style>
 </head>
@@ -128,65 +135,41 @@
                 alt="logo" 
                 class="logo"
             >
-            <h1 class="title">
-
-            </h1>
-            <p class="subtitle">
-                Please check your inbox for instructions on how to reset the password
-            </p>
-
-            <div class="email-image">
-                <img 
-                    src="./icons/email.svg" 
-                    alt="email"
-                >
-            </div>
-            <button class="primary-button login-button">
-                Login
-            </button>
-            <p class="resend">
-                <span> Didn't receive the email
-                    <a href="#">
-                        Resend
-                    </a>
-                </span>
-            </p>
-            </h1>
-            <p class="subtitle">
-                Please check your i
-            </p>
-            <div class="email image">
-                <img 
-                    src="./icons/email.svg"
-                    alt="">
-            </div>
             <form action="#"  class="form">
                 <label for="password" class="label">
+                    Email address
+                </label>
+                <input 
+                    type="text" 
+                    id="email"
+                    placeholder="example@example.com"
+                    class="input input-email"
+                > 
+
+                <label for="password"  class="label">
                     Password
                 </label>
                 <input 
-                    type="password" 
-                    id="password"
-                    placeholder="*********"
-                    class="input input-password"
-                > 
-
-                <label for="new-password"  class="label">
-                    Re-enter password
-                </label>
-                <input 
                     type="password"
-                    id="new-password"
+                    id="password"
                     placeholder="*********"
                     class="input input-password"                
                 >
 
                 <input 
                     type="submit" 
-                    value="Confirm" 
+                    value="Log In" 
                     class="primary-button login-button"
                 >
+
+                <a href="#">
+                    Forgot my password
+                </a>
             </form>
+
+            <button class="secondary-button signup-button">
+                Sign Up
+            </button>
         </div>
     </div>
 </body>
