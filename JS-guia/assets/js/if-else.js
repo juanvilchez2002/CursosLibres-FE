@@ -30,6 +30,7 @@ if(dia ===0){ // === se
 // sin usar if else o switch, unicamente obketos
 // devolver el día de la semana
 
+// con un arreglo
 const semana = [
     "Lunes",
     "Martes",
@@ -43,3 +44,7 @@ const semana = [
 console.log(
     semana[dia-1]
 );
+
+const diaLetra = {
+    
+}
