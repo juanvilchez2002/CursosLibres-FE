@@ -11,7 +11,7 @@
 
 // creamos una función para encapsular el juego y lo autoinvocamos
 
-(
+const miModulo = (
     () => {
         'use strict'
         /**
@@ -40,20 +40,41 @@
 
         const puntosHTML = document.querySelectorAll('small'); 
 
-        const divCartasJugador = document.querySelector('#jugador-cartas'), // referencia al div del jugador
-              divCartasComputadora = document.querySelector('#computadora-cartas'); // referencia al div de la computadora
+        // creamos arreglos para la cartas, es más dinamico
+        const divCartasJugadores = document.querySelectorAll('.divCartas');
+
+
+        //const divCartasJugador = document.querySelector('#jugador-cartas'), // referencia al div del jugador
+        //      divCartasComputadora = document.querySelector('#computadora-cartas'); // referencia al div de la computadora
 
         // esta función inicializa el juego y a su vez crea la cantidad de jugadores
         // que por defecto es 1
         const inicializarJuego = (numJugadores = 1) => {
+
             deck = crearDeck();
 
+            // reinicializando los puntos de los jugadores
+            puntosJugadores = [];
+
             // creando el número de jugadores
-            for(let i =0; i < numJugadores; i++){
+            for(let i =0; i <= numJugadores; i++){
                 puntosJugadores.push(0)
             }
 
-            console.log({puntosJugadores});
+            // reinicializando el puntaje
+            puntosHTML.forEach(
+                puntos => puntos.innerText=0
+            )
+
+            // reinicializando la imagen de las cartas
+            divCartasJugadores.forEach(
+                carta => carta.innerHTML=""
+            )
+
+            // habilidatamos los botones
+            btnPedir.disabled = false;
+            btnDetener.disabled = false;
+
         }
 
         // función que crea una nueva baraja
@@ -143,37 +164,26 @@
         const acumularPuntos = (carta, turno) =>{
 
             puntosJugadores[turno] = puntosJugadores[turno] + valorCarta(carta);
-            puntosHTML[turno].innerText = puntosJugadores[turno]
+            puntosHTML[turno].innerText = puntosJugadores[turno];
+
+            return puntosJugadores[turno];
         }
 
+        // función q va a crear las cartas
+        const crearCarta = (carta, turno) => {
 
+            const imgCarta = document.createElement('img'); // creamos la imagen q estara en memoria
+            imgCarta.src = `./assets/cartas/${carta}.png`; // referenciamos la ubicación de la carta
+            imgCarta.classList.add('carta'); // añadimos la clase
 
+            divCartasJugadores[turno].append(imgCarta); // adicionamos la carta en el juego
+        }
 
-        // turno de la computadora
-        const turnoComputadora = (puntosMinimos) =>{
+        // función que evalua quien gana
+        const determinarGanador = () =>{
 
-            do{
-                //pedimos una carta
-                const carta = pedirCarta();
-                
-                //sumamos puntos
-                //puntosComputadora = puntosComputadora + valorCarta(carta);
-
-                //mostramos los puntajes en el Jugador
-                //puntosHTML[1].innerText = puntosComputadora;
-
-                // creamos una nueva carta
-                const imgCarta = document.createElement('img'); // creamos la imagen q estara en memoria
-                imgCarta.src = `./assets/cartas/${carta}.png`
-                imgCarta.classList.add('carta'); // añadimos la clase
-
-                divCartasComputadora.append(imgCarta);
-
-                if(puntosMinimos > 21){
-                    break;
-                }
-
-            }while(( puntosComputadora < puntosMinimos ) && ( puntosMinimos <=21 ));
+            // realizamos la desestructuración de puntosJugadores,
+            const [puntosMinimos, puntosComputadora] = puntosJugadores;
 
             setTimeout(() => {
                 if( puntosComputadora === puntosMinimos ) {
@@ -186,7 +196,47 @@
                     alert('Computadora Gana')
                 }
             }, 1000 );
+        }
+
+        // turno de la computadora
+        const turnoComputadora = (puntosMinimos) =>{
+
+            let puntosComputadora = 0;
+
+            do{
+                //pedimos una carta
+                const carta = pedirCarta();
+                
+                //sumamos puntos
+                //puntosComputadora = puntosComputadora + valorCarta(carta);
+
+                //mostramos los puntajes en el Jugador
+                //puntosHTML[1].innerText = puntosComputadora;
+
+
+                // llamamos a acumular puntos
+                // en caso q tengamos más de 2 jugadores se usara lo sgte
+                // puntosJugadores.length - 1
+                puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
+
+                // creamos la carta a travez de la función que creamos
+                crearCarta(carta, puntosJugadores.length - 1);
+
+                // creamos una nueva carta
+                // const imgCarta = document.createElement('img'); // creamos la imagen q estara en memoria
+                // imgCarta.src = `./assets/cartas/${carta}.png`
+                // imgCarta.classList.add('carta'); // añadimos la clase
+
+                // divCartasComputadora.append(imgCarta);
+
+                if(puntosMinimos > 21){
+                    break;
+                }
+
+            }while(( puntosComputadora < puntosMinimos ) && ( puntosMinimos <=21 ));            
             
+            determinarGanador();
+
         } 
 
 
@@ -197,17 +247,24 @@
             const carta = pedirCarta();
             
             //sumamos puntos
-            puntosJugador = puntosJugador + valorCarta(carta);
+            //puntosJugador = puntosJugador + valorCarta(carta);
 
             //mostramos los puntajes en el Jugador
-            puntosHTML[0].innerText = puntosJugador;
+            //puntosHTML[0].innerText = puntosJugador;
+
+
+            // llamamos a acumularPuntos
+            const puntosJugador = acumularPuntos(carta, 0);
+
+            // creamos las cartas a travez de la función creada
+            crearCarta(carta, 0)
 
             // creamos una nueva carta
-            const imgCarta = document.createElement('img'); // creamos la imagen q estara en memoria
-            imgCarta.src = `./assets/cartas/${carta}.png`
-            imgCarta.classList.add('carta'); // añadimos la clase
+            // const imgCarta = document.createElement('img'); // creamos la imagen q estara en memoria
+            // imgCarta.src = `./assets/cartas/${carta}.png`
+            // imgCarta.classList.add('carta'); // añadimos la clase
 
-            divCartasJugador.append(imgCarta);
+            // divCartasJugador.append(imgCarta);
 
             // controlamos el puntaje:
             // si > 21, perdio
@@ -232,7 +289,7 @@
             btnDetener.disabled = true;
 
             // la computadora realiza el pedido de la carta
-            turnoComputadora(puntosJugador);
+            turnoComputadora(puntosJugadores[0]);
         })
 
         // al clickear el boton nuevo;
@@ -247,21 +304,26 @@
             //deck = crearDeck();
             
             // resetamos valores de los puntajes
-            puntosHTML[0].innerText = 0;
-            puntosHTML[1].innerText = 0;
+            //puntosHTML[0].innerText = 0;
+            //puntosHTML[1].innerText = 0;
 
             // resetemos los puntajes
-            puntosJugador = 0;
-            puntosComputadora = 0;
+            //puntosJugador = 0;
+            //puntosComputadora = 0;
 
             // resetamos las imagenes de las cartas
-            divCartasComputadora.innerHTML = '';
-            divCartasJugador.innerHTML = '';
+            //divCartasComputadora.innerHTML = '';
+            //divCartasJugador.innerHTML = '';
 
             // habilidatmos los botones
             btnPedir.disabled = false;
             btnDetener.disabled = false;
         })
+        
+    // lo que retornemos sera lo unico visible osea publico, los demas son privadas
+        return {
+            nuevoJuego: inicializarJuego
+        };
     }
 )();
 
