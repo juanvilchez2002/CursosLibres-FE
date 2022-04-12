@@ -5,9 +5,11 @@ class Persona {
 
     // definimos las propiedades => las variables a usar, si no se pasa información al momento de la inicialización
     // estos valores son "undefined", para este caso lo inicializamos con un valor ''
+    // esto es opcional, xq se puede crear en el constructor
     nombre='';
     codigo='';
     frase='';
+    comida='';
 
     // constructor => metodo q se ejecuta en el momento que se crea una instancia
     // en el constructor podemos pasar valores
@@ -24,6 +26,17 @@ class Persona {
         this.frase = frase;
     }
 
+    // establecemos un set, se usa para controlar como se establece el valor de una propiedad
+    // generalmente recibe solo un argumento, y no pueden llamarse como la propiedad a trabajar
+    set setComidaFavorita(comida){
+        this.comida = comida.toUpperCase();
+    }
+
+    // get => recupera una propiedad contruida
+    get getComidaFavorita(){
+        return `La comida favorita de ${this.nombre} es ${this.comida}`;
+    }
+
     // se crea los metodos de la clase, que son funciones tmb se puede enviar argumentos
     // los metodos de una misma clase se pueden llamar entre si
     quienSoy(){
@@ -37,21 +50,28 @@ class Persona {
         console.log(`${this.frase} dice: ${this.codigo}`);
 
         // tambien podemos crear metodos dentro de los metodos
-        quienSoy(); // como no lo referenciamos, llama a la función que se crea en el metodo
-        function quienSoy(){
-            console.log('Hola Mundito...');
-        }
+        // quienSoy(); // como no lo referenciamos, llama a la función que se crea en el metodo
+        // function quienSoy(){
+        //    console.log('Hola Mundito...');
+        // }
     }
 }
 
 const spiderman = new Persona("Peter Parker", "Spiderman", "Soy tu amigable vecino Spiderman");
 const iroman = new Persona("Tony Stark", "Ironman", "Yo soy Iroman");
-console.log(spiderman);
-console.log(iroman);
+// console.log(spiderman);
+// console.log(iroman);
 
 // para q se ejecute un metodo se usa de la sgte manera
 // clase.metodo(); si no lleva parentesis no se ejecutara
 // spiderman.quienSoy();
 spiderman.miFrase();
+
+// se trabaja como una propiedad, y se usa =
+spiderman.setComidaFavorita = "Pie de cereza de la tia May";
+console.log(spiderman.getComidaFavorita);
+
+console.log(spiderman);
+
 // iroman.quienSoy();  
-iroman.miFrase();  
+//iroman.miFrase();  
