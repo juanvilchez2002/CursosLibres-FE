@@ -1,6 +1,21 @@
 // clases en JS
 class Persona {
 
+    // las propiedades estaticas se utilizan cuando se queire almacenar datos a nivel de la clase,
+    // también no vinculados a una instancia de la clase 
+    static _conteo = 0;
+
+    // los métodos estáticos se pueden ejecutar sin necesidad de instanciar la clase
+    static get conteo(){
+        return Persona._conteo+' instancias';
+    }
+
+    static mensaje(){
+        console.log(this.nombre);// aquí como estamos usando this, y hace una referencia al objeto nos dara undefined
+        console.log('Hola a todos, soy un método estático');
+    }
+
+
     // todas las clases en JS tienen activado el 'use strict' por defecto
 
     // definimos las propiedades => las variables a usar, si no se pasa información al momento de la inicialización
@@ -24,6 +39,10 @@ class Persona {
         this.nombre = nombre;
         this.codigo = codigo;
         this.frase = frase;
+
+        // aquí referenciamos a Persona._conteo para saber cuantas veces se instancia una clase
+        // no usamos 'this', xq haria referencia al objeto creado
+        Persona._conteo++;
     }
 
     // establecemos un set, se usa para controlar como se establece el valor de una propiedad
@@ -59,6 +78,7 @@ class Persona {
 
 const spiderman = new Persona("Peter Parker", "Spiderman", "Soy tu amigable vecino Spiderman");
 const iroman = new Persona("Tony Stark", "Ironman", "Yo soy Iroman");
+const cap = new Persona("Tony Stark", "Ironman", "Yo soy Iroman");
 // console.log(spiderman);
 // console.log(iroman);
 
@@ -71,7 +91,17 @@ spiderman.miFrase();
 spiderman.setComidaFavorita = "Pie de cereza de la tia May";
 console.log(spiderman.getComidaFavorita);
 
-console.log(spiderman);
+// asignamos a la propiedad estatica el valor de 2
+//Persona._conteo = 2;
+
+console.log("Conteo estatico", Persona._conteo);
+console.log(Persona.conteo);
+Persona.mensaje();
+
+//console.log(spiderman);
 
 // iroman.quienSoy();  
-//iroman.miFrase();  
+// iroman.miFrase();
+
+Persona.propiedadExterna = "Hola Mundo..."
+console.log(Persona);
