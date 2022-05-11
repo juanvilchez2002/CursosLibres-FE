@@ -50,3 +50,34 @@ txtInput.addEventListener('keyup', (e)=>{
         
     }
 })
+
+// evento que capturara el lugar dnde se realice el click
+divTodoList.addEventListener('click', (e) =>{
+    // mostrar cuando se realice el evento
+    //console.log(e);
+
+    // buscamos el elemento
+    const nombreElemento = e.target.localName;
+    const todoElemento = e.target.parentElement.parentElement; // tiene todo el elemento creado
+    const todoId = todoElemento.getAttribute('data-id');
+    // console.log(todoElemento);
+    // console.log(typeof todoId);
+
+    // click en el check (completado)
+    if(nombreElemento.includes('input')){ 
+
+        // pasamos el id al metodo de la clase
+        todoList.marcarCompletado(todoId);
+        // .toggle -> hace adicionar o restar una propiedad segun la encuentre o no
+        todoElemento.classList.toggle('completed');
+    }else if(nombreElemento.includes('button')){ // eliminaremos la tarea con el HTML
+        
+        // enviamos el id para eliminar
+        todoList.eliminarTodo(todoId);
+        
+        // eliminaremos el HTML
+        divTodoList.removeChild(todoElemento);
+    }
+
+    console.log(todoList);
+})
