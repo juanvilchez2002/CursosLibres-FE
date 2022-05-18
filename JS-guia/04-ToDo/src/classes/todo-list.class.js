@@ -37,6 +37,8 @@ export class TodoList{
 
     // eliminaresmos las tareas completada
     eliminarCompletados(){
+
+        this.todos = this.todos.filter(todo => !todo.completado)
         
     }
 

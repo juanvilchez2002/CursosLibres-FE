@@ -3,7 +3,8 @@ import { todoList } from "../index";
 
 // referencias en el html
 const divTodoList = document.querySelector('.todo-list');
-const txtInput = document.querySelector('.new-todo')
+const txtInput = document.querySelector('.new-todo');
+const btnBorrar = document.querySelector('.clear-completed');
 
 export const crearTodoHtml = (todo) => {
     const htmlTodo = `
@@ -80,4 +81,11 @@ divTodoList.addEventListener('click', (e) =>{
     }
 
     console.log(todoList);
+});
+
+// Evento que eliminara todos los completados
+btnBorrar.addEventListener('click', ()=>{
+    console.log('hol');
+    todoList.eliminarCompletados();
+    console.log(divTodoList.children.length);
 })
