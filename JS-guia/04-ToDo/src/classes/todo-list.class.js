@@ -2,12 +2,16 @@
 export class TodoList{
 
     constructor(){
-        this.todos = []
+        // this.todos = []
+        this.cargarLocalStorage();
     }
 
     // insertar una nueva tarea
     nuevoTodo(todo){
-        this.todos.push(todo)
+        this.todos.push(todo);
+
+        // guardamos en el localStorage
+        this.guardarLocalStorage();
     }
 
     // eliminar una tarea a partir del Id
@@ -17,6 +21,9 @@ export class TodoList{
         // sin la tarea a eliminar
         // this.TodoList.filter( todo => todo.id!=id) -> instrución para eliminar el id
         this.todos = this.todos.filter( todo => todo.id!=id); // creamos una nueva lista
+
+        // guardamos en el localStorage
+        this.guardarLocalStorage();
 
     }
 
@@ -33,14 +40,40 @@ export class TodoList{
                 break; // romplemos el ciclo
             }
         }
+
+        // guardamos en el localStorage
+        this.guardarLocalStorage();
     }
 
     // eliminaresmos las tareas completada
     eliminarCompletados(){
 
         this.todos = this.todos.filter(todo => !todo.completado)
+
+        // guardamos en el localStorage
+        this.guardarLocalStorage();
         
     }
 
+    // guardar en el localStorage
+    guardarLocalStorage(){
 
+        // guardamos en el localStorage pero solo almacena texto
+        // y al objeto lo convertimos a texto
+        // el metodo JSON.stringify convierte un objeto en texto
+        localStorage.setItem('todo', JSON.stringify(this.todos))
+    }
+
+    // cargar todas las tareas del localStorage
+    cargarLocalStorage(){
+
+        // verificamos si el localStorage esta vacio
+        this.todos = localStorage.getItem('todo')?
+                     // convertimos el texto a objeto con JSON.parse
+                     JSON.parse(localStorage.getItem('todo')):
+                     // si no existe creamos la instancia vacia
+                     [];
+
+
+    }
 }

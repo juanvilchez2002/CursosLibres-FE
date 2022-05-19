@@ -86,6 +86,21 @@ divTodoList.addEventListener('click', (e) =>{
 // Evento que eliminara todos los completados
 btnBorrar.addEventListener('click', ()=>{
     console.log('hol');
+    // llama a al función que eliminara todos los completados del arreglo
+    // pero no eliminara el HTML
     todoList.eliminarCompletados();
-    console.log(divTodoList.children.length);
+
+    // eliminamos todos los completados del HTML
+    // sacamos el tamaño del arreglo en el HTML y hacemos el recorrigo desde el final al inicio
+    for(let i = divTodoList.children.length -1; i >=0; i--){
+
+        // colocamos la tarea
+        const elemento = divTodoList.children[i];
+
+        // comparamos si esta completado, al verificar si tiene el elemento tiene la clase
+        // completed, de ser así lo removemos
+        if(elemento.classList.contains('completed')){
+            divTodoList.removeChild(elemento);
+        }
+    }
 })
