@@ -12,18 +12,19 @@ export const todoList = new TodoList();
 
 // creamos el html
 // crearTodoHtml(tarea);
-console.log(todoList.todos);
 
+
+/*
 todoList.todos.forEach(todo => {
     crearTodoHtml(todo)
-});
+});*/
 
-const newTodo = new Todo('Aprender JS');
-todoList.nuevoTodo(newTodo);
-
+// const newTodo = new Todo('Aprender JS');
+// todoList.nuevoTodo(newTodo);
 
 // tambien se puede reducir a este código, si solo es un solo argumento
-// todoList.todos.forEach( crearTodoHtml);
+todoList.todos.forEach( crearTodoHtml);
+console.log(todoList.todos);
 
 
 
