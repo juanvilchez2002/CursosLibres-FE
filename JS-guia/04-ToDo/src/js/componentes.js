@@ -5,6 +5,8 @@ import { todoList } from "../index";
 const divTodoList = document.querySelector('.todo-list');
 const txtInput = document.querySelector('.new-todo');
 const btnBorrar = document.querySelector('.clear-completed');
+const ulFilters = document.querySelector('.filters');
+const anchorFiltros = document.querySelectorAll('.filtro');
 
 export const crearTodoHtml = (todo) => {
     const htmlTodo = `
@@ -85,7 +87,7 @@ divTodoList.addEventListener('click', (e) =>{
 
 // Evento que eliminara todos los completados
 btnBorrar.addEventListener('click', ()=>{
-    console.log('hol');
+    // console.log('hol');
     // llama a al función que eliminara todos los completados del arreglo
     // pero no eliminara el HTML
     todoList.eliminarCompletados();
@@ -103,4 +105,50 @@ btnBorrar.addEventListener('click', ()=>{
             divTodoList.removeChild(elemento);
         }
     }
+})
+
+// evento que realizara los filtros
+ulFilters.addEventListener('click', (e) =>{
+    console.log(e.target.text);
+
+    const filtro = e.target.text;
+
+    // borramos de los elementos la clase 'selected'
+    anchorFiltros.forEach(elem => elem.classList.remove('selected'))
+    e.target.classList.add('selected')
+
+    // si no existe se termina el evento
+    if(!filtro) {return};
+
+    // recorremos todas los elementos las tareas divTodoList
+    for(const elemento of divTodoList.children){
+        
+        
+        // removemos de los elementos la clase .hidden de CSS
+        elemento.classList.remove('hidden');
+
+        // si el elemento tiene la clase 'completado'
+        const completado = elemento.classList.contains('completed')
+
+        // realizando los filtros
+        switch(filtro){
+
+            // si hacemos click en Pendientes
+            case 'Pendientes':
+                // adicionamos la clase hidden a los completados para ocultar la tarea
+                if(completado){
+                    elemento.classList.add('hidden');
+                };
+                break;
+            // si hacemos click en completados
+            case 'Completados':
+                // adicionamos la clase hidden a los pendientes para ocultar la tarea
+                if(!completado){
+                    elemento.classList.add('hidden');
+                };
+                break;
+        }
+    }
+
+
 })
