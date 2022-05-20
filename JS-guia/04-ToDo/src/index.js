@@ -18,6 +18,10 @@ todoList.todos.forEach(todo => {
     crearTodoHtml(todo)
 });
 
+const newTodo = new Todo('Aprender JS');
+todoList.nuevoTodo(newTodo);
+
+
 // tambien se puede reducir a este código, si solo es un solo argumento
 // todoList.todos.forEach( crearTodoHtml);
 
