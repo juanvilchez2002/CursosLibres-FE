@@ -28,7 +28,9 @@ export const buscarHeroe = (id)=>{
         // realizamos la condición de la promesa
         if(heroe){
             // resolve -> puede devolver cualquier cosa, argumento u objetos
-            resolve(heroe);
+            setTimeout(()=>{
+                resolve(heroe);
+            }, 1000);
         }else{
             // si no se cumple
             reject(`No existe un héroe con id ${id}`);
