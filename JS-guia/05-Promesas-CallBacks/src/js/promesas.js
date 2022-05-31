@@ -31,7 +31,48 @@ export const buscarHeroe = (id)=>{
             resolve(heroe);
         }else{
             // si no se cumple
-            reject(`No existe un héroe con id ${heroe}`);
+            reject(`No existe un héroe con id ${id}`);
         }
     })
 }
+
+// Async
+// al indicar que la función es async x defecto estamos regresando una nueva
+// promesa, x consecuente no es necesario todo el código despues de new Promise
+export const buscarHeroeAsync = async (id)=>{
+
+    const heroe = heroes[id];
+
+    // el async devuelve x defecto una promesa
+    if(heroe){
+        return heroe;
+    }else{
+        throw `No existe un héroe con el id ${heroe}`
+    }
+    
+}
+
+// otras promesa
+const promesaLenta = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve('Promesa Lenta')
+    }, 2000)
+})
+
+const promesaMedia = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve('Promesa Media')
+    }, 1500)
+})
+
+const promesaRapida = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve('Promesa Rapida')
+    }, 1000)
+})
+
+export {
+    promesaLenta, promesaMedia, promesaRapida
+}
+
+
