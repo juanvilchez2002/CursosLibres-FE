@@ -26,3 +26,18 @@ export const obtenerHeroesArr = async ()=>{
      // un solo código
      // return await Promise.all(heroesIds.map(buscarHeroe))
 }
+
+export const obtenerHeroeAwait = async(id) =>{
+
+    //manejando el try.catch
+    try{
+        // await resuelve una promesa
+        const heroe = await buscarHeroeAsync(id);
+        return heroe;
+    }catch(err){
+        console.log(`Catch!!!!`);
+        throw err;
+    }
+    
+
+}
