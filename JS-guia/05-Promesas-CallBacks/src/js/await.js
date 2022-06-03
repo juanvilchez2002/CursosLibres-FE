@@ -1,6 +1,8 @@
 import { buscarHeroe, buscarHeroeAsync } from "./promesas";
 
 const heroesIds = ['capi', 'iron', 'spider'];
+const heroesPromesas = heroesIds.map(id => buscarHeroe(id)); // ejemplo para el for e if await
+// otra forma const heroesPromesas = heroesIds.map(buscarHeroe)
 
 export const obtenerHeroesArr = async ()=>{
     const heroesArr = [];
@@ -40,4 +42,28 @@ export const obtenerHeroeAwait = async(id) =>{
     }
     
 
+}
+
+// ejemplo de for e if await
+export const heroesCiclo = async () =>{
+    console.time('heroesCiclo');
+
+    // for await
+    for await (const heroe of heroesPromesas){
+        console.log(heroe);
+    }
+
+    // const heroes = await Promise.all(heroesPromesas);
+    // console.log(heroes);
+
+    console.timeEnd('heroesCiclo');
+}
+
+// ejemplo del if await
+export const heroeIdAwait =  async (id) =>{
+    if ( (await buscarHeroeAsync(id)).nombre === 'Iroman'){
+        console.log('El mejor de todos');
+    }else{
+        console.log('nada');
+    }
 }
