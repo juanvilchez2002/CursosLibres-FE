@@ -25,7 +25,7 @@ const crearchistesHtml = () =>{
     const divChistes = document.createElement('div');
     divChistes.innerHTML = html;
 
-    body.append(divChistes);
+    body.appendc(divChistes);
 }
 
 const eventos = () =>{

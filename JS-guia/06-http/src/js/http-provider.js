@@ -1,6 +1,7 @@
 // aquí se ha de guardar la logica del programa
 
-const jockerURL = 'https://api.chucknorris.io/jokes/random'; // url
+const jockerURL = 'https://api.chucknorris.io/jokes/random'; // url de api chistes de chuck norris
+const urlUsuarios = 'https://reqres.in/api/users?page=2'; // url de api de usuarios libres
 
 // función que nos devolvera una promesa
 const obtenerChiste = async() =>{
@@ -23,6 +24,20 @@ const obtenerChiste = async() =>{
     }
 }
 
+
+const obtenerUsuario = async() =>{
+    try {
+        const resp = await fetch(urlUsuarios);
+        const {data: usuarios} = await resp.json();
+        // console.log(usuarios);
+        return usuarios;
+
+    } catch (error) {
+        
+    }
+}
+
 export {
-    obtenerChiste
+    obtenerChiste,
+    obtenerUsuario
 }

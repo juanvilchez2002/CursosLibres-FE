@@ -7,6 +7,12 @@ import {obtenerChiste} from './js/http-provider';
 })
 obtenerChiste().then(console.log); */
 
-import { init } from "./js/chistes-page";
+//import { init } from "./js/chistes-page";
 
+// init();
+
+import {obtenerUsuario} from './js/http-provider';
+import {init} from './js/usuarios-page'
+
+// obtenerUsuario();
 init();
