@@ -1,7 +1,7 @@
 // aquí se ha de guardar la logica del programa
 
 const jockerURL = 'https://api.chucknorris.io/jokes/random'; // url de api chistes de chuck norris
-const urlUsuarios = 'https://reqres.in/api/users?page=1'; // url de api de usuarios libres
+const urlUsuarios = 'https://reqres.in/api/users?page=2'; // url de api de usuarios libres
 
 // función que nos devolvera una promesa
 const obtenerChiste = async() =>{
