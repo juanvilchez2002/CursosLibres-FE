@@ -20,6 +20,9 @@ import {init} from './js/usuarios-page'
 init();
 */
 
+
+/* 
+// iniciando el CRUD
 import * as CRUD from './js/crud-provider';
 
 
@@ -42,3 +45,9 @@ CRUD.updateUsuario(1, {
 
 // eliminar usuario
 CRUD.borrarUsuario(1).then(console.log)
+
+*/
+
+import {init } from './js/archivos-page';
+
+init();
